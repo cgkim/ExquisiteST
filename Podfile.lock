@@ -1,0 +1,33 @@
+PODS:
+  - BlocksKit (1.8.3):
+    - libffi
+  - libffi (3.0.13)
+  - MKNetworkKit (0.87):
+    - Reachability (~> 3.1.0)
+  - Reachability (3.1.1)
+  - SDWebImage (3.5):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5)
+  - SVProgressHUD (0.9)
+  - SVPullToRefresh (0.4.1)
+  - XMLDictionary (1.3)
+
+DEPENDENCIES:
+  - BlocksKit (= 1.8.3)
+  - MKNetworkKit (= 0.87)
+  - SDWebImage (= 3.5)
+  - SVProgressHUD
+  - SVPullToRefresh (= 0.4.1)
+  - XMLDictionary (= 1.3)
+
+SPEC CHECKSUMS:
+  BlocksKit: 27257f9cbbec0ea98c80ba83cc2ea7111ae62eb2
+  libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
+  MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
+  Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
+  SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
+  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+  SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
+  XMLDictionary: 27390d3517062694ccb307a7750250e1b687571d
+
+COCOAPODS: 0.26.2

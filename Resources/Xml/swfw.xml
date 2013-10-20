@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+
+    <Item>
+
+        <Img>
+            lv_car.png
+
+        </Img>
+
+        <Text>
+            汽车
+
+        </Text>
+
+        <UrIId>
+            swfw-1
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            lv_jypx.png
+
+        </Img>
+
+        <Text>
+            教育培训
+
+        </Text>
+
+        <UrIId>
+            swfw-2
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            lv_dzxx.png
+
+        </Img>
+
+        <Text>
+            电子信息
+
+        </Text>
+
+        <UrIId>
+            swfw-3
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            lv_yiyao.png
+
+        </Img>
+
+        <Text>
+            医药
+
+        </Text>
+
+        <UrIId>
+           swfw-4
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            lv_jinrong.png
+
+        </Img>
+
+        <Text>
+            金融
+
+        </Text>
+
+        <UrIId>
+           swfw-5
+
+        </UrIId>
+    </Item>
+
+</Configs>

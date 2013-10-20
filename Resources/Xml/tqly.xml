@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+   <Item>
+
+        <Img>
+            tqly-jp.png
+
+        </Img>
+
+        <Text>
+         金平区
+
+        </Text>
+
+        <UrIId>
+            tqly-5
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            tqly-lh.png
+
+        </Img>
+
+        <Text>
+         龙湖区
+
+        </Text>
+
+        <UrIId>
+            tqly-6
+
+        </UrIId>
+    </Item>
+    <Item>
+
+        <Img>
+            tqly-hj.png
+        </Img>
+
+        <Text>
+         濠江区
+        </Text>
+
+        <UrIId>
+            tqly-4
+        </UrIId>
+    </Item>
+    <Item>
+
+        <Img>
+            tqly-cy.png
+        </Img>
+
+        <Text>
+          朝阳区
+        </Text>
+
+        <UrIId>
+            tqly-1
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            tqly-cn.png
+        </Img>
+
+        <Text>
+            潮南区
+        </Text>
+
+        <UrIId>
+            tqly-2
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            tqly-ch.png
+        </Img>
+
+        <Text>
+            澄海区
+        </Text>
+
+        <UrIId>
+            tqly-3
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            tqly-hj.png
+        </Img>
+
+        <Text>
+         南澳县
+        </Text>
+
+        <UrIId>
+            tqly-7
+        </UrIId>
+    </Item>
+
+</Configs>

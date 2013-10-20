@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+
+    <Item>
+
+        <Img>
+            b.jpg
+
+        </Img>
+
+        <Text>
+            主办：中共汕头市宣传部    协办：中国联通汕头分公司
+
+        </Text>
+
+        <UrIId>
+            index-1
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            c.jpg
+
+        </Img>
+
+        <Text>
+            主办：中共汕头市宣传部    协办：中国联通汕头分公司
+
+        </Text>
+
+        <UrIId>
+            index-2
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            d.jpg
+
+        </Img>
+
+        <Text>
+            主办：中共汕头市宣传部    协办：中国联通汕头分公司
+
+        </Text>
+
+        <UrIId>
+            index-3
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            e.jpg
+
+        </Img>
+
+        <Text>
+            主办：中共汕头市宣传部    协办：中国联通汕头分公司
+
+        </Text>
+
+        <UrIId>
+           index-4
+
+        </UrIId>
+    </Item>
+</Configs>

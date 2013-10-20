@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+
+    <Item>
+
+        <Img>
+            icon_xfst.png
+
+        </Img>
+
+        <Text>
+            幸福汕头
+
+        </Text>
+
+        <UrIId>
+            xfst
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            icon_zjst.png
+
+        </Img>
+
+        <Text>
+            走进汕头
+
+        </Text>
+
+        <UrIId>
+            zjst
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            icon_jjst.png
+
+        </Img>
+
+        <Text>
+            聚焦汕头
+
+        </Text>
+
+        <UrIId>
+            jjst
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            icon_yszx.png
+
+        </Img>
+
+        <Text>
+            衣食住行
+
+        </Text>
+
+        <UrIId>
+           yszx
+
+        </UrIId>
+    </Item>
+      <Item>
+
+        <Img>
+            icon_whfq.png
+
+        </Img>
+
+        <Text>
+            文化风情
+
+        </Text>
+
+        <UrIId>
+           whfq
+
+        </UrIId>
+    </Item>
+    <Item>
+
+      <Img>
+          icon_jjfz.png
+
+      </Img>
+
+      <Text>
+          经济发展
+
+      </Text>
+
+      <UrIId>
+         jjfz
+
+      </UrIId>
+  </Item>
+</Configs>

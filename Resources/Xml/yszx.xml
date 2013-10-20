@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+
+    <Item>
+
+        <Img>
+            icon_tqyb.png
+        </Img>
+
+        <Text>
+            天气预报
+
+        </Text>
+
+        <UrIId>
+            yszx-1
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            icon_wxbm.png
+        </Img>
+
+        <Text>
+            无线便民
+
+        </Text>
+
+        <UrIId>
+            yszx-2
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            icon_wxjt.png
+        </Img>
+
+        <Text>
+            无线交通
+
+        </Text>
+
+        <UrIId>
+            yszx-3
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            icon_wxms.png
+        </Img>
+
+        <Text>
+         无线美食
+
+        </Text>
+
+        <UrIId>
+            yszx-4
+
+        </UrIId>
+    </Item>
+   <Item>
+
+        <Img>
+            icon_acjlb.png
+        </Img>
+
+        <Text>
+         爱车俱乐部
+
+        </Text>
+
+        <UrIId>
+            yszx-5
+
+        </UrIId>
+    </Item>
+       <Item>
+
+        <Img>
+            icon_w3g.png
+        </Img>
+
+        <Text>
+         沃·3G
+
+        </Text>
+
+        <UrIId>
+            yszx-6
+
+        </UrIId>
+    </Item>
+</Configs>

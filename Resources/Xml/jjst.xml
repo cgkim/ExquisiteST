@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+
+    <Item>
+
+        <Img>
+            icon_szyw.png
+        </Img>
+
+        <Text>
+            时政要闻
+
+        </Text>
+
+        <UrIId>
+            jjst-1
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            icon_shms.png
+        </Img>
+
+        <Text>
+            社会民生
+
+        </Text>
+
+        <UrIId>
+            jjst-2
+
+        </UrIId>
+    </Item>
+
+    <Item>
+
+        <Img>
+            icon_3gxt.png
+        </Img>
+
+        <Text>
+            3G学堂
+
+        </Text>
+
+        <UrIId>
+            jjst-3
+
+        </UrIId>
+    </Item>
+
+</Configs>
