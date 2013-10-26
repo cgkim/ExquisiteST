@@ -10,38 +10,30 @@
 
 @implementation News
 
-
 //===========================================================
 //  Keyed Archiving
 //
 //===========================================================
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.Img forKey:@"Img"];
-    [encoder encodeObject:self.Text forKey:@"Text"];
-    [encoder encodeObject:self.UrIId forKey:@"UrIId"];
+    [encoder encodeObject:self.Image forKey:@"Image"];
+    [encoder encodeObject:self.Title forKey:@"Title"];
+    [encoder encodeObject:self.SubTitle forKey:@"SubTitle"];
+    [encoder encodeObject:self.ItemId forKey:@"ItemId"];
+    [encoder encodeObject:self.ItemType forKey:@"ItemType"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if (self) {
-        self.Img = [decoder decodeObjectForKey:@"Img"];
-        self.Text = [decoder decodeObjectForKey:@"Text"];
-        self.UrIId = [decoder decodeObjectForKey:@"UrIId"];
+        self.Image = [decoder decodeObjectForKey:@"Image"];
+        self.Title = [decoder decodeObjectForKey:@"Title"];
+        self.SubTitle = [decoder decodeObjectForKey:@"SubTitle"];
+        self.ItemId = [decoder decodeObjectForKey:@"ItemId"];
+        self.ItemType = [decoder decodeObjectForKey:@"ItemType"];
     }
     return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    id theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
-    
-    [theCopy setImg:[self.Img copy]];
-    [theCopy setText:[self.Text copy]];
-    [theCopy setUrIId:[self.UrIId copy]];
-    
-    return theCopy;
 }
 
 @end

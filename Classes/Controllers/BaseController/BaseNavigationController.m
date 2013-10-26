@@ -18,16 +18,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        UIImage *navBg = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"navbg" ofType:@"png"]] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+//        UIImage *navBg = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"top_bg" ofType:@"png"]] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
 //        [self.navigationBar setBackgroundImage:navBg forBarMetrics:UIBarMetricsDefault];
-//        self.navigationBar.tintColor = [UIColor colorWithRed:58/255.0 green:105/255.0 blue:144/255.0 alpha:1];
-        self.navigationBar.tintColor = [UIColor colorWithRed:0 green:47/255.0 blue:196/255.0 alpha:1];
-        
+        self.navigationBar.tintColor = [UIColor colorWithRed:0 green:95/255.0 blue:166/255.0 alpha:1.0];        
         self.tabBarItem.titlePositionAdjustment = UIOffsetMake(0.0, -2.0);
         
         // iOS7+
         if ([self.navigationBar respondsToSelector:@selector(barTintColor)]) {
-            
+
         }
     }
     return self;

@@ -23,8 +23,13 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [self initBaseControllers];
+    self.home = [[HomeController alloc] initWithNibName:nil bundle:nil];
+    self.home.title = @"精致汕头";
+    BaseNavigationController *homeNav = [[BaseNavigationController alloc] initWithRootViewController:self.home];
+    homeNav.tabBarItem.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_home" ofType:@"png"]];
+    homeNav.tabBarItem.title = @"首页";
     
+    self.window.rootViewController = homeNav;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -57,39 +62,6 @@
 }
 
 #pragma mark Helpers
-
-- (void)initBaseControllers {
-    self.home = [[HomeController alloc] initWithNibName:nil bundle:nil];
-    self.home.title = @"精致汕头";
-    BaseNavigationController *homeNav = [[BaseNavigationController alloc] initWithRootViewController:self.home];
-    homeNav.tabBarItem.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_home" ofType:@"png"]];
-    homeNav.tabBarItem.title = @"首页";
-    
-    self.tqly = [[TQLYController alloc] initWithNibName:nil bundle:nil];
-    self.tqly.title = @"特区掠影";
-    BaseNavigationController *tqlyNav = [[BaseNavigationController alloc] initWithRootViewController:self.tqly];
-    tqlyNav.tabBarItem.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_sar" ofType:@"png"]];
-    
-    self.tzst = [[TZSTController alloc] initWithNibName:nil bundle:nil];
-    self.tzst.title = @"投资汕头";
-    BaseNavigationController *tzstNav = [[BaseNavigationController alloc] initWithRootViewController:self.tzst];
-    tzstNav.tabBarItem.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_invest" ofType:@"png"]];
-    
-    self.weibo = [[WebController alloc] initWithNibName:nil bundle:nil];
-    self.weibo.title = @"政府微博";
-    self.weibo.urlString = @"http://3g.shantou.gov.cn/";
-    BaseNavigationController *weiboNav = [[BaseNavigationController alloc] initWithRootViewController:self.weibo];
-    weiboNav.tabBarItem.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_weibo" ofType:@"png"]];
-    
-    self.tab = [[BaseTabBarController alloc] initWithNibName:nil bundle:nil];
-    self.tab.viewControllers = @[homeNav, tqlyNav, tzstNav, weiboNav];
-    self.tab.tabBar.backgroundColor = [UIColor colorWithRed:33/255.0 green:33/255.0 blue:33/255.0 alpha:1.0];
-    if ([self.tab.tabBar respondsToSelector:@selector(barTintColor)]) {
-        self.tab.tabBar.barTintColor = [UIColor colorWithRed:33/255.0 green:33/255.0 blue:33/255.0 alpha:1.0];
-        self.tab.tabBar.tintColor = [UIColor colorWithRed:45/255.0 green:159/255.0 blue:255/255.0 alpha:1.0];   // iOS7 选中的颜色
-    }
-    self.window.rootViewController = self.tab;
-}
 
 //- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 //{

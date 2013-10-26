@@ -8,13 +8,10 @@
 
 #import "WebController.h"
 #import "SVProgressHUD.h"
-#import "AppDelegate.h"
-
 
 @interface WebController () <UIWebViewDelegate>
 
 @property (weak, nonatomic) UIWebView *webView;
-@property (strong, nonatomic) MKNetworkOperation *netOperation;
 
 @end
 
@@ -24,6 +21,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        self.title = @"新闻详情";
     }
     return self;
 }
@@ -32,9 +30,9 @@
 {
     [super loadView];
 
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.webView = webView;
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
 }
@@ -49,7 +47,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     NSLog(@"start");
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil) maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -72,31 +70,20 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // 这里不好。web端需要调整。
-    if (self.UrIId) {
-        self.netOperation = [NTAppDelegate.engine getNewsContentWithNid:self.UrIId OnSucceeded:^(NSString *content) {
-            [self.webView loadHTMLString:content baseURL:nil];
-        } onError:^(NSError *engineError) {
-            NSLog(@"error: %@", [engineError description]);
-        }];
-    } else if (![[self.webView.request.URL absoluteString] isEqualToString:self.urlString]) {
-        NSLog(@"request url: %@", self.urlString);
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
-    }
-    [super viewWillAppear:animated];
+    NSLog(@"request url: %@", self.urlString);
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    if (self.netOperation) {
-        [self.netOperation cancel];
-        self.netOperation = nil;
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
     }
 }
 
 - (void)unLoadViews {
     // TODO 具体的释放操作
-    self.webView = nil;
+
 }
 
 @end

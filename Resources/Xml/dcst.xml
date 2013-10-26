@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+    <Item>
+        <Image>icon_msst.png</Image>
+        <Title>汕头美食</Title>
+        <SubTitle></SubTitle>
+        <ItemId>ms</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>icon_stly.png</Image>
+        <Title>汕头旅游</Title>
+        <SubTitle></SubTitle>
+        <ItemId>ly</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>icon_strw.png</Image>
+        <Title>汕头人文</Title>
+        <SubTitle></SubTitle>
+        <ItemId>rw</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+</Configs>

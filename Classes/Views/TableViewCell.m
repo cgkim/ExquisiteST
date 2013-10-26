@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.textLabel.font = [UIFont systemFontOfSize:16.0];
     }
     return self;
 }
@@ -24,6 +25,27 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setModel:(News *)model
+{
+    _model = model;
+    if ([_model.ItemType isEqualToString:@"V"]) {
+        self.imageView.image = [UIImage imageNamed:@"t_video.png"];
+    }else if ([_model.ItemType isEqualToString:@"T"]) {
+        self.imageView.image = [UIImage imageNamed:@"t_text.png"];
+    }else if ([_model.ItemType isEqualToString:@"I"]) {
+        self.imageView.image = [UIImage imageNamed:@"t_pic.png"];
+    } else {
+        
+    }
+    self.textLabel.text = _model.Title;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+//    self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y, 35.0, 27.0);
 }
 
 @end

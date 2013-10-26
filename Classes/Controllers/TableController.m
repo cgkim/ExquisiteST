@@ -10,12 +10,10 @@
 #import "TableViewCell.h"
 #import "News.h"
 
-#import "XMLDictionary.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
 
 #import "AppDelegate.h"
-
+#import "WebController.h"
 
 @interface TableController ()
 
@@ -28,7 +26,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:style];
     if (self) {
     }
     return self;
@@ -37,15 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
 }
 
 #pragma mark - TableView DataSource
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -53,9 +46,9 @@
     return self.newsItems.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 100.0f;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50.0f;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -63,22 +56,12 @@
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ListCellIdentifier];
     if (cell == nil) {
         cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ListCellIdentifier];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    if (self.newsItems.count > 0) {
-        News *news = (News *)self.newsItems[indexPath.row];
-        NSRange range = [news.Img rangeOfString:@"http"];
-        if (range.location == 0) {
-            NSLog(@"img : %@", news.Img);
-            NSURL *imageURL = [NSURL URLWithString:news.Img];
-            [cell.imageView setImageWithURL:imageURL placeholderImage:nil];
-        } else {
-            cell.imageView.image = [UIImage imageNamed:news.Img];
-        }
-        cell.textLabel.text = news.Text;
-    }
+    News *news = (News *)self.newsItems[indexPath.row];
+    cell.model = news;
     
     return cell;
 }
@@ -86,43 +69,33 @@
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (!(self.segment.selectedSegmentIndex == 0 && indexPath.section == 0)) {
-//        News *news = (News *)self.newsDataSource[indexPath.row];
-//        NewsDetailViewController *detail = [[NewsDetailViewController alloc] initWithModel:news];
-//        [self.navigationController pushViewController:detail animated:YES];
-//        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//    }
+    News *news = (News *)self.newsItems[indexPath.row];
+    WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+    wc.urlString = WEBVIEW_URL(news.ItemId);
+    [self.navigationController pushViewController:wc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     if (!self.newsItems) {
-        if (self.tableView.style == UITableViewStyleGrouped) {
-            NSString *xmlPath = [[NSBundle mainBundle] pathForResource:self.UrIId ofType:@"xml"];
-            NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
-            NSDictionary *zjstDictionary = [NSDictionary dictionaryWithXMLData:xmlData];
-            NSArray *jzstItems = [zjstDictionary objectForKey:@"Item"];
-            self.newsItems = [NSMutableArray array];
-            [jzstItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                [self.newsItems addObject:[[News alloc] initWithDictionary:obj]];
-            }];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+        self.netOperation = [NTAppDelegate.engine getNewsListV2WithNlid:self.ItemId OnSucceeded:^(NSMutableArray *objects) {
+            self.newsItems = objects;
             [self.tableView reloadData];
-        } else {
-            [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil) maskType:SVProgressHUDMaskTypeBlack];
-            self.netOperation = [NTAppDelegate.engine getNewsListWithNlid:self.UrIId OnSucceeded:^(NSMutableArray *objects) {
-                self.newsItems = objects;
-                [self.tableView reloadData];
-                [SVProgressHUD dismiss];
-            } onError:^(NSError *engineError) {
-                [SVProgressHUD dismiss];
-                NSLog(@"%@", [engineError description]);
-            }];
-        }
+            [SVProgressHUD dismiss];
+        } onError:^(NSError *engineError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", [engineError description]);
+        }];
     }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     if (self.netOperation) {
         [self.netOperation cancel];
         self.netOperation = nil;

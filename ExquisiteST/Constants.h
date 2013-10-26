@@ -19,12 +19,15 @@
 #define BASE_URL @"183.234.98.82"
 
 #define JZST_URL(__C1__) [NSString stringWithFormat:@"jzst/%@", __C1__]
-#define GET_NEWS_LIST JZST_URL(@"getNewsList.aspx")
+
+#define GET_NEWS_LIST JZST_URL(@"getNewsListV2.aspx")
 #define GET_NEWS_CONTENT JZST_URL(@"getNewsContent.aspx")
 
 #define VIDEO_URL @"http://183.234.98.82/files/happyst.mp4"
 
 #define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/jzst/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
+
+#define ZBST_SP_URL @"http://u.3gtv.net/yuetv/Living_Channel_Info?online_id=37"
 
 #define TIMEOUT 15
 #define PAGECOUNT 10

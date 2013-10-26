@@ -8,18 +8,21 @@
 
 #import "CollectionController.h"
 
-#import "XMLDictionary.h"
+#import "AppDelegate.h"
+#import "SVProgressHUD.h"
 
 #import "PSCollectionView.h"
 #import "CollectionViewCell.h"
 
 #import "News.h"
-#import "TableController.h"
+#import "WebController.h"
+#import "MovieController.h"
 
 @interface CollectionController () <PSCollectionViewDelegate, PSCollectionViewDataSource>
 
+@property (strong, nonatomic) MKNetworkOperation *netOperation;
 @property (weak, nonatomic) PSCollectionView *collectionView;
-@property (strong, nonatomic) NSMutableArray *menuItems;
+@property (strong, nonatomic) NSMutableArray *newsItems;
 
 @end
 
@@ -38,12 +41,11 @@
 {
     [super viewDidLoad];
   
-    PSCollectionView *collectionView = [[PSCollectionView alloc] initWithFrame:CGRectMake(0.0, 20.0, self.view.frame.size.width, self.view.frame.size.height)];
+    PSCollectionView *collectionView = [[PSCollectionView alloc] initWithFrame:self.view.bounds];
     self.collectionView = collectionView;
     collectionView.collectionViewDelegate = self;
     collectionView.collectionViewDataSource = self;
-    collectionView.scrollEnabled = NO;
-    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     collectionView.numColsPortrait = 2;
     collectionView.numColsLandscape = 2;
     [self.view addSubview:collectionView];
@@ -52,11 +54,11 @@
 
 #pragma mark - PSCollectionViewDelegate and DataSource
 - (NSInteger)numberOfViewsInCollectionView:(PSCollectionView *)collectionView {
-    return self.menuItems.count;
+    return self.newsItems.count;
 }
 
 - (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    return 110.0;
+    return 140.0;
 }
 
 - (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView viewAtIndex:(NSInteger)index {
@@ -66,39 +68,53 @@
         cell = [[CollectionViewCell alloc] initWithFrame:CGRectZero];
     }
     
-    [cell fillViewWithObject:self.menuItems[index]];
+    [cell fillViewWithObject:self.newsItems[index]];
     
     return cell;
 }
 
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
-    News *news = (News *)self.menuItems[index];
-    TableController *lists = [[TableController alloc] initWithStyle:UITableViewStylePlain];
-    lists.hidesBottomBarWhenPushed = YES;
-    lists.title = news.Text;
-    lists.UrIId = news.UrIId;
-    [self.navigationController pushViewController:lists animated:YES];
+    News *news = (News *)self.newsItems[index];
+    if ([news.ItemType isEqualToString:@"V"]) {
+        MovieController *mv = [[MovieController alloc] initWithContentURL:[NSURL URLWithString:WEBVIEW_URL(news.ItemType)]];
+        [self presentMoviePlayerViewControllerAnimated:mv];
+    } else {
+        WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+        wc.urlString = WEBVIEW_URL(news.ItemId);
+        [self.navigationController pushViewController:wc animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (!self.menuItems) {
-        NSString *xmlPath = [[NSBundle mainBundle] pathForResource:self.UrIId ofType:@"xml"];
-        NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
-        NSDictionary *jzstDictionary = [NSDictionary dictionaryWithXMLData:xmlData];
-        NSArray *xmlItems = [jzstDictionary objectForKey:@"Item"];
-        self.menuItems = [NSMutableArray array];
-        [xmlItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [self.menuItems addObject:[[News alloc] initWithDictionary:obj]];
+    if (!self.newsItems) {
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+        self.netOperation = [NTAppDelegate.engine getNewsListV2WithNlid:self.ItemId OnSucceeded:^(NSMutableArray *objects) {
+            self.newsItems = objects;
+            [self.collectionView reloadData];
+            [SVProgressHUD dismiss];
+        } onError:^(NSError *engineError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", [engineError description]);
         }];
-        [self.collectionView reloadData];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
+    if (self.netOperation) {
+        [self.netOperation cancel];
+        self.netOperation = nil;
     }
 }
 
 - (void)unLoadViews {
     // TODO 具体的释放操作
-    self.menuItems = nil;
+    self.newsItems = nil;
 }
 
 @end

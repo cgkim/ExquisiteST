@@ -16,7 +16,7 @@ DEPENDENCIES:
   - BlocksKit (= 1.8.3)
   - MKNetworkKit (= 0.87)
   - SDWebImage (= 3.5)
-  - SVProgressHUD
+  - SVProgressHUD (= 0.9)
   - SVPullToRefresh (= 0.4.1)
   - XMLDictionary (= 1.3)
 
@@ -30,4 +30,4 @@ SPEC CHECKSUMS:
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
   XMLDictionary: 27390d3517062694ccb307a7750250e1b687571d
 
-COCOAPODS: 0.26.2
+COCOAPODS: 0.27.1

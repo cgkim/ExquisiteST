@@ -17,9 +17,9 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (MKNetworkOperation *)getNewsListWithNlid:(NSString *)nlid
-                                OnSucceeded:(ArrayBlock)succeededBlock
-                                    onError:(ErrorBlock)errorBlock
+- (MKNetworkOperation *)getNewsListV2WithNlid:(NSString *)nlid
+                                  OnSucceeded:(ArrayBlock)succeededBlock
+                                      onError:(ErrorBlock)errorBlock
 {
     NSDictionary *params = @{@"nlid": nlid};
     MKNetworkOperation *op = (MKNetworkOperation *)[self operationWithPath:GET_NEWS_LIST params:params httpMethod:@"GET"];
@@ -57,5 +57,6 @@
     [self enqueueOperation:op];
     return op;
 }
+
 
 @end

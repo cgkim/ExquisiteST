@@ -12,6 +12,5 @@
 @interface WebController : BaseViewController
 
 @property (strong, nonatomic) NSString *urlString;
-@property (strong, nonatomic) NSString *UrIId;
 
 @end

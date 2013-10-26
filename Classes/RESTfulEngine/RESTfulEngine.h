@@ -18,12 +18,17 @@ typedef void (^ErrorBlock)(NSError *engineError);
 
 @interface RESTfulEngine : MKNetworkEngine
 
-- (MKNetworkOperation *)getNewsListWithNlid:(NSString *)nlid
-                                OnSucceeded:(ArrayBlock)succeededBlock
-                                    onError:(ErrorBlock)errorBlock;
 
-- (MKNetworkOperation *)getNewsContentWithNid:(NSString *)nid
-                                  OnSucceeded:(StringBlock)succeededBlock
+- (MKNetworkOperation *)getNewsListV2WithNlid:(NSString *)nlid
+                                  OnSucceeded:(ArrayBlock)succeededBlock
                                       onError:(ErrorBlock)errorBlock;
 
+
+//- (MKNetworkOperation *)getNewsContentWithNid:(NSString *)nid
+//                                  OnSucceeded:(StringBlock)succeededBlock
+//                                      onError:(ErrorBlock)errorBlock;
+
+
 @end
+
+

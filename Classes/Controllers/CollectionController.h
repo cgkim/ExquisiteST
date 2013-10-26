@@ -10,6 +10,6 @@
 
 @interface CollectionController : BaseViewController
 
-@property (strong, nonatomic) NSString *UrIId;
+@property (strong, nonatomic) NSString *ItemId;
 
 @end

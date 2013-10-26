@@ -10,8 +10,10 @@
 
 @interface News : BaseModel
 
-@property (strong, nonatomic) NSString *Img;
-@property (strong, nonatomic) NSString *Text;
-@property (strong, nonatomic) NSString *UrIId;
+@property (strong, nonatomic) NSString *Image;
+@property (strong, nonatomic) NSString *Title;
+@property (strong, nonatomic) NSString *SubTitle;
+@property (strong, nonatomic) NSString *ItemId;
+@property (strong, nonatomic) NSString *ItemType;
 
 @end

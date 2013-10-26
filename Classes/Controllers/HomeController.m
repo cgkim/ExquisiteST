@@ -8,28 +8,30 @@
 
 #import "HomeController.h"
 #import "ScrollPageView.h"
+#import "NimbusLauncher.h"
+#import <QuartzCore/QuartzCore.h>
 
 #import "XMLDictionary.h"
 #import "AppDelegate.h"
 #import "News.h"
 
 #import "BaseNavigationController.h"
-#import "WebController.h"
-#import "XFSTController.h"
-#import "ZJSTController.h"
-#import "CollectionController.h"
-
 #import "TableController.h"
-#import "PSCollectionView.h"
-#import "CollectionViewCell.h"
+#import "CollectionController.h"
+#import "ZBSTController.h"
+#import "Table2Controller.h"
+#import "WebController.h"
 
 
-@interface HomeController () <ScrollPageViewDelegate, PSCollectionViewDelegate, PSCollectionViewDataSource>
+static NSString *const kButtonReuseIdentifier = @"launcherButton";
+
+@interface HomeController () <ScrollPageViewDelegate, NILauncherDelegate>
 
 @property (weak, nonatomic) ScrollPageView *scrollPageView;
 @property (strong, nonatomic) NSMutableArray *newsItems;
 
-@property (weak, nonatomic) PSCollectionView *collectionView;
+@property (weak, nonatomic) NILauncherView *launcherView;
+@property (nonatomic, readwrite, strong) NILauncherViewModel *model;
 @property (strong, nonatomic) NSMutableArray *menuItems;
 
 @end
@@ -58,7 +60,8 @@
         [self.newsItems addObject:[[News alloc] initWithDictionary:obj]];
     }];
     
-    CGFloat scrollPageViewHeight = IS_WIDESCREEN ? 250.0 : 170.0;
+    CGFloat scrollPageViewHeight = IS_WIDESCREEN ? 240.0 : 160.0;
+    CGFloat bottomViewHeight = 37.0;
     
     ScrollPageView *scrollPageView = [[ScrollPageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, scrollPageViewHeight)];
     self.scrollPageView = scrollPageView;
@@ -71,92 +74,82 @@
     NSData *jzstXmlData = [NSData dataWithContentsOfFile:jzstPath];
     NSDictionary *jzstDictionary = [NSDictionary dictionaryWithXMLData:jzstXmlData];
     NSArray *jzstItems = [jzstDictionary objectForKey:@"Item"];
-    self.menuItems = [NSMutableArray array];
+
+    NSMutableArray *page1Content = [NSMutableArray array];
+    NSMutableArray *page2Content = [NSMutableArray array];
     [jzstItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self.menuItems addObject:[[News alloc] initWithDictionary:obj]];
+        News *news = [[News alloc] initWithDictionary:obj];
+        if (idx > 5) {
+            [page2Content addObject:[NILauncherViewObject objectWithTitle:news.Title image:[UIImage imageNamed:news.Image] itemid:news.ItemId]];
+        } else {
+            [page1Content addObject:[NILauncherViewObject objectWithTitle:news.Title image:[UIImage imageNamed:news.Image] itemid:news.ItemId]];
+        }
     }];
+    NSArray *contents = [NSArray arrayWithObjects:page1Content, page2Content, nil];
+    _model = [[NILauncherViewModel alloc] initWithArrayOfPages:contents delegate:nil];
     
-    PSCollectionView *collectionView = [[PSCollectionView alloc] initWithFrame:CGRectMake(0.0, scrollPageViewHeight, self.view.bounds.size.width, self.view.bounds.size.height - scrollPageViewHeight)];
-    self.collectionView = collectionView;
-    collectionView.collectionViewDelegate = self;
-    collectionView.collectionViewDataSource = self;
-    collectionView.scrollEnabled = NO;
-    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-    collectionView.numColsPortrait = 3;
-    collectionView.numColsLandscape = 3;
-    [self.view addSubview:collectionView];
-    [collectionView reloadData];
+    NILauncherView *launcherView = [[NILauncherView alloc] initWithFrame:CGRectMake(0.0, scrollPageViewHeight, self.view.bounds.size.width, self.view.bounds.size.height - scrollPageViewHeight - bottomViewHeight)];
+    self.launcherView = launcherView;
+    launcherView.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0];
+    launcherView.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
+    [self.view addSubview:launcherView];
+
+    self.launcherView.dataSource = _model;
+    self.launcherView.delegate = self;
+    [self.launcherView reloadData];
+    
+    UIImageView *bottomView;
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]){
+        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 64.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
+    } else {
+        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 44.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
+    }
+    bottomView.image = [UIImage imageNamed:@"toolbar_bg.png"];
+    [self.view addSubview:bottomView];
 }
 
 #pragma mark - ScrollPageView Delegate
 - (void)scrollPageView:(ScrollPageView *)scrollPageView didSelectAtIndex:(NSUInteger)index
 {
-    News *news = (News *)self.newsItems[index];
-    WebController *detail = [[WebController alloc] initWithNibName:nil bundle:nil];
-    detail.title = news.Text;
-    detail.UrIId = news.UrIId;
-    detail.hidesBottomBarWhenPushed = YES;
-//    detail.urlString = WEBVIEW_URL(news.UrIId);
-    [self.navigationController pushViewController:detail animated:YES];
+//    News *news = (News *)self.newsItems[index];
+//    WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+//    wc.urlString = WEBVIEW_URL(news.ItemId);
+//    [self.navigationController pushViewController:wc animated:YES];
 }
 
-#pragma mark - PSCollectionViewDelegate and DataSource
-- (NSInteger)numberOfViewsInCollectionView:(PSCollectionView *)collectionView {
-    return self.menuItems.count;
-}
+#pragma mark - NILauncherDelegate
 
-- (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    return 90.0;
-}
-
-- (PSCollectionViewCell *)collectionView:(PSCollectionView *)collectionView viewAtIndex:(NSInteger)index {
+- (void)launcherView:(NILauncherView *)launcher didSelectItemOnPage:(NSInteger)page atIndex:(NSInteger)index {
+    id<NILauncherViewObject> object = [self.model objectAtIndex:index pageIndex:page];
     
-    CollectionViewCell *cell = (CollectionViewCell *)[self.collectionView dequeueReusableView];
-    if (!cell) {
-        cell = [[CollectionViewCell alloc] initWithFrame:CGRectZero];
-    }
+    NSLog(@"%@", object.title);
     
-    [cell fillViewWithObject:self.menuItems[index]];
-    
-    return cell;
-}
-
-
-- (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
-    News *news = (News *)self.menuItems[index];
-
-    switch (index) {
-        case 0:
-        {
-            XFSTController *xfst = [[XFSTController alloc] initWithNibName:nil bundle:nil];
-            xfst.hidesBottomBarWhenPushed = YES;
-            xfst.title = news.Text;
-            xfst.UrIId = news.UrIId;
-            [self.navigationController pushViewController:xfst animated:YES];
-        }
-            break;
-        case 1:
-        {
-            TableController *zjst = [[TableController alloc] initWithStyle:UITableViewStyleGrouped];
-            zjst.hidesBottomBarWhenPushed = YES;
-            zjst.title = news.Text;
-            zjst.UrIId = news.UrIId;
-            [self.navigationController pushViewController:zjst animated:YES];
-        }
-            break;
-        default:
-        {
-            // 其他 聚焦汕头 衣食住行 文化风情 经济发展
-            CollectionController *other = [[CollectionController alloc] initWithNibName:nil bundle:nil];
-            other.hidesBottomBarWhenPushed = YES;
-            other.title = news.Text;
-            other.UrIId = news.UrIId;
-            [self.navigationController pushViewController:other animated:YES];
-        }
-            break;
+    NSArray *collectionArray = @[@"qbh", @"mlst", @"xyfc"];
+    NSArray *tableArray = @[@"cfhy", @"tzfz", @"mskx"];
+    NSArray *table2Array = @[@"dcst", @"3gxt"];
+    if ([collectionArray containsObject:object.itemid]) {
+        CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
+        cc.title = object.title;
+        cc.ItemId = object.itemid;
+        [self.navigationController pushViewController:cc animated:YES];
+    } else if ([tableArray containsObject:object.itemid]) {
+        TableController *tc = [[TableController alloc] initWithStyle:UITableViewStylePlain];
+        tc.title = object.title;
+        tc.ItemId = object.itemid;
+        [self.navigationController pushViewController:tc animated:YES];
+    } else if ([table2Array containsObject:object.itemid]) {
+        Table2Controller *tc = [[Table2Controller alloc] initWithStyle:UITableViewStyleGrouped];
+        tc.title = object.title;
+        tc.ItemId = object.itemid;
+        [self.navigationController pushViewController:tc animated:YES];
+    } else if ([object.itemid isEqualToString:@"zbst"]) {
+        ZBSTController *zbst = [[ZBSTController alloc] initWithNibName:nil bundle:nil];
+        zbst.title = object.title;
+        [self.navigationController pushViewController:zbst animated:YES];
+    } else {
+        NSLog(@"none?");
     }
 }
-
 
 - (void)unLoadViews {
     // TODO 具体的释放操作

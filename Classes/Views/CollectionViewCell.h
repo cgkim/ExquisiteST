@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic, readonly) UIImageView *imageView;
 @property (strong, nonatomic, readonly) UILabel *titleLabel;
+@property (strong, nonatomic, readonly) UIImageView *playIcon;
 
 @end
