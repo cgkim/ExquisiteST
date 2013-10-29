@@ -15,6 +15,7 @@
 
 #import "AppDelegate.h"
 #import "WebController.h"
+#import "MovieController.h"
 
 @interface ZBSTController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -56,14 +57,7 @@
     [tabNormal setTitle:@"视频" forState:UIControlStateNormal];
     tabNormal.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
     [tabNormal setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [tabNormal addEventHandler:^(id sender) {
-        
-        WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
-        wc.urlString = ZBST_SP_URL;
-        wc.title = @"视频";
-        [self.navigationController pushViewController:wc animated:YES];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
+    [tabNormal addTarget:self action:@selector(videoShow) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tabNormal];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 60.0, self.view.bounds.size.width, self.view.bounds.size.height - 60.0)];
@@ -75,6 +69,16 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
+}
+
+- (void)videoShow
+{
+//    MovieController *mv = [[MovieController alloc] initWithContentURL:[NSURL URLWithString:ZBST_VIDEO_URL]];
+//    [self presentMoviePlayerViewControllerAnimated:mv];
+    WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+    wc.urlString = ZBST_SP_URL;
+    wc.title = @"视频";
+    [self.navigationController pushViewController:wc animated:YES];
 }
 
 #pragma mark - TableView DataSource

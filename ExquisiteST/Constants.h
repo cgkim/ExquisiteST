@@ -6,7 +6,7 @@
 //
 //
 
-#define IS_WIDESCREEN (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
+#define IS_WIDESCREEN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #ifdef DEBUG
 #define NSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
@@ -30,6 +30,7 @@
 #define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
 
 #define ZBST_SP_URL @"http://u.3gtv.net/yuetv/Living_Channel_Info?online_id=37"
+#define ZBST_VIDEO_URL @"http://58.248.254.7:9135/live/ds-stzh.sdp/playlist.m3u8?portalId=5&contentType=4&pid=37&uid=no_number&nettype=uninet&sec=947badcd171bdac4121c72d8527cec69&uc=yuetv_wap"
 
 #define TIMEOUT 15
 #define PAGECOUNT 10
@@ -39,12 +40,4 @@
 
 #define DATEFORMAT @"yyyy-MM-dd"
 #define DATETIMEFORMAT @"yyyy-MM-dd HH:mm:ss"
-
-
-
-#define BARBUTTON_COLOR [UIColor colorWithRed:71/255.0 green:117/255.0 blue:155/255.0 alpha:1]
-#define BORDER_COLOR [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
-
-
-
 

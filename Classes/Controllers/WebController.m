@@ -47,6 +47,8 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     NSLog(@"start");
+    NSLog(@"url%@", [webView.request.URL absoluteString]);
+    NSLog(@"url%@", [webView stringByEvaluatingJavaScriptFromString:@"window.location.href"]);
     [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
 }
 

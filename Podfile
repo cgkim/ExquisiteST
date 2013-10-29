@@ -6,9 +6,9 @@ pod 'MKNetworkKit', '0.87'
 pod 'XMLDictionary', '1.3'
 pod 'SDWebImage', '3.5'
 
-pod 'SVProgressHUD', '0.9'
-pod 'SVPullToRefresh', '0.4.1'
+#pod 'SVProgressHUD', '0.9'
+#pod 'SVPullToRefresh', '0.4.1'
 
-pod 'BlocksKit', '1.8.3'
+#pod 'BlocksKit', '1.8.3'
 
 

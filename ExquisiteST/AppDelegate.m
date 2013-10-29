@@ -17,7 +17,7 @@
     [UIApplication sharedApplication].statusBarHidden = NO;
     
     self.engine = [[RESTfulEngine alloc] initWithHostName:BASE_URL];
-//    [self.engine useCache];
+    [self.engine useCache];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
