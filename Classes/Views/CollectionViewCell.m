@@ -40,15 +40,16 @@
     [super fillViewWithObject:object];
     
     News *news = (News *)object;
-    NSRange range = [news.Image rangeOfString:@"http"];
+    NSRange range = [news.Image rangeOfString:@"http://"];
+    NSURL *imageURL;
     if (range.location == 0) {
-        NSURL *imageURL = [NSURL URLWithString:news.Image];
-        [_imageView setImageWithURL:imageURL placeholderImage:nil];
-        _imageView.contentMode = UIViewContentModeScaleToFill;
+        imageURL = [NSURL URLWithString:news.Image];
     } else {
-        _imageView.contentMode = UIViewContentModeCenter;
-        _imageView.image = [UIImage imageNamed:news.Image];
+        imageURL = [NSURL URLWithString:IMAGE_URL(news.Image)];
+//        _imageView.contentMode = UIViewContentModeCenter;
     }
+    _imageView.contentMode = UIViewContentModeScaleToFill;
+    [_imageView setImageWithURL:imageURL placeholderImage:nil];
     
     _titleLabel.text = news.Title;
     

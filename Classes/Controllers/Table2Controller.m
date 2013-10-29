@@ -71,7 +71,7 @@
 {
     News *news = (News *)self.menuItems[indexPath.row];
     NSArray *collectionArray = @[@"ms", @"ly"];
-    NSArray *tableArray = @[@"rw"];
+    NSArray *tableArray = @[@"rw",@"3g1",@"3g2",@"3g3",@"3g4",@"3g7",@"3g8"];
     if ([collectionArray containsObject:news.ItemId]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = news.Title;

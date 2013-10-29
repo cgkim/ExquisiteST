@@ -77,7 +77,15 @@
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
     News *news = (News *)self.newsItems[index];
     if ([news.ItemType isEqualToString:@"V"]) {
-        MovieController *mv = [[MovieController alloc] initWithContentURL:[NSURL URLWithString:WEBVIEW_URL(news.ItemType)]];
+        ;
+        NSURL *videoURL;
+        NSRange range = [news.Image rangeOfString:@"http://"];
+        if (range.location == 0) {
+            videoURL = [NSURL URLWithString:news.ItemId];
+        } else {
+            videoURL = [NSURL URLWithString:VIDEO_URL(news.ItemId)];
+        }
+        MovieController *mv = [[MovieController alloc] initWithContentURL:videoURL];
         [self presentMoviePlayerViewControllerAnimated:mv];
     } else {
         WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];

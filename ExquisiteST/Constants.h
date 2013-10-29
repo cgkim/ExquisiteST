@@ -16,16 +16,18 @@
 #define debugMethod()
 #endif
 
-#define BASE_URL @"183.234.98.82"
+#define BASE_URL @"112.91.128.50"
 
-#define JZST_URL(__C1__) [NSString stringWithFormat:@"jzst/%@", __C1__]
+#define JZST_URL(__C1__) [NSString stringWithFormat:@"%@", __C1__]
 
 #define GET_NEWS_LIST JZST_URL(@"getNewsListV2.aspx")
 #define GET_NEWS_CONTENT JZST_URL(@"getNewsContent.aspx")
 
-#define VIDEO_URL @"http://183.234.98.82/files/happyst.mp4"
+#define VIDEO_URL(__C1__) [NSString stringWithFormat:@"http://%@/vd/%@", BASE_URL, __C1__]
 
-#define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/jzst/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
+#define IMAGE_URL(__C1__) [NSString stringWithFormat:@"http://%@/image/%@", BASE_URL, __C1__]
+
+#define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
 
 #define ZBST_SP_URL @"http://u.3gtv.net/yuetv/Living_Channel_Info?online_id=37"
 

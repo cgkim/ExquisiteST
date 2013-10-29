@@ -1,24 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configs>
     <Item>
-        <Image>icon_msst.png</Image>
-        <Title>汕头美食</Title>
-        <SubTitle></SubTitle>
-        <ItemId>ms</ItemId>
-        <ItemType>T</ItemType>
+        <Image>
+            3g1.jpg
+        </Image>
+        <Title>
+            十八大专区
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g1
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
     </Item>
+    
     <Item>
-        <Image>icon_stly.png</Image>
-        <Title>汕头旅游</Title>
-        <SubTitle></SubTitle>
-        <ItemId>ly</ItemId>
-        <ItemType>T</ItemType>
+        
+        <Image>
+            3g2.jpg
+        </Image>
+        
+        <Title>
+            圆梦南粤
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g2
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
     </Item>
+    
     <Item>
-        <Image>icon_strw.png</Image>
-        <Title>汕头人文</Title>
-        <SubTitle></SubTitle>
-        <ItemId>rw</ItemId>
-        <ItemType>T</ItemType>
+        
+        <Image>
+            3g3.jpg
+        </Image>
+        
+        <Title>
+            理论动态
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g3
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
     </Item>
+    
+    <Item>
+        
+        <Image>
+            3g4.jpg
+        </Image>
+        
+        <Title>
+            社会热点
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g4
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
+    </Item>
+    
+    <Item>
+        
+        <Image>
+            3g7.jpg
+        </Image>
+        
+        <Title>
+            名家书话
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g7
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
+    </Item>
+    
+    <Item>
+        
+        <Image>
+            3g8.jpg
+        </Image>
+        
+        <Title>
+            生活百科
+        </Title>
+        
+        <SubTitle>
+        </SubTitle>
+        
+        <ItemId>
+            3g8
+        </ItemId>
+        
+        <ItemType>
+            T
+        </ItemType>
+    </Item>
+
 </Configs>

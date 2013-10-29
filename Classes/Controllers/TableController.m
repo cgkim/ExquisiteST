@@ -14,6 +14,7 @@
 
 #import "AppDelegate.h"
 #import "WebController.h"
+#import "MovieController.h"
 
 @interface TableController ()
 
@@ -70,9 +71,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     News *news = (News *)self.newsItems[indexPath.row];
-    WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
-    wc.urlString = WEBVIEW_URL(news.ItemId);
-    [self.navigationController pushViewController:wc animated:YES];
+    if ([news.ItemType isEqualToString:@"V"]) {
+        ;
+        NSURL *videoURL;
+        NSRange range = [news.Image rangeOfString:@"http://"];
+        if (range.location == 0) {
+            videoURL = [NSURL URLWithString:news.ItemId];
+        } else {
+            videoURL = [NSURL URLWithString:VIDEO_URL(news.ItemId)];
+        }
+        MovieController *mv = [[MovieController alloc] initWithContentURL:videoURL];
+        [self presentMoviePlayerViewControllerAnimated:mv];
+    } else {
+        WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+        wc.urlString = WEBVIEW_URL(news.ItemId);
+        [self.navigationController pushViewController:wc animated:YES];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
