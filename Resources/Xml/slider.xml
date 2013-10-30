@@ -2,28 +2,28 @@
 <Configs>
     <Item>
         <Image>a.jpg</Image>
-        <Title>侨博会1</Title>
+        <Title>侨博会</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>b.jpg</Image>
-        <Title>侨博会2</Title>
+        <Title>汕头风景</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>c.jpg</Image>
-        <Title>侨博会3</Title>
+        <Title>汕头风景</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>d.jpg</Image>
-        <Title>侨博会4</Title>
+        <Title>汕头风景</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>

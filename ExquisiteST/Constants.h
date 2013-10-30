@@ -30,7 +30,7 @@
 #define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
 
 #define ZBST_SP_URL @"http://u.3gtv.net/yuetv/Living_Channel_Info?online_id=37"
-#define ZBST_VIDEO_URL @"http://58.248.254.7:9135/live/ds-stzh.sdp/playlist.m3u8?portalId=5&contentType=4&pid=37&uid=no_number&nettype=uninet&sec=947badcd171bdac4121c72d8527cec69&uc=yuetv_wap"
+#define ZBST_VIDEO_URL @"http://u.3gtv.net/yuetv/Living_Play?online_id=37&p_mode=H_m3u8&jmds="
 
 #define TIMEOUT 15
 #define PAGECOUNT 10

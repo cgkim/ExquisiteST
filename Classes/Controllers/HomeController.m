@@ -18,7 +18,6 @@
 #import "BaseNavigationController.h"
 #import "TableController.h"
 #import "CollectionController.h"
-#import "ZBSTController.h"
 #import "Table2Controller.h"
 #import "WebController.h"
 
@@ -126,7 +125,7 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
     
     NSArray *collectionArray = @[@"qbh", @"mlst", @"xyfc"];
     NSArray *tableArray = @[@"cfhy", @"tzfz", @"mskx"];
-    NSArray *table2Array = @[@"dcst", @"3gxt"];
+    NSArray *table2Array = @[@"dcst", @"3gxt", @"zbst"];
     if ([collectionArray containsObject:object.itemid]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = object.title;
@@ -142,10 +141,6 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
         tc.title = object.title;
         tc.ItemId = object.itemid;
         [self.navigationController pushViewController:tc animated:YES];
-    } else if ([object.itemid isEqualToString:@"zbst"]) {
-        ZBSTController *zbst = [[ZBSTController alloc] initWithNibName:nil bundle:nil];
-        zbst.title = object.title;
-        [self.navigationController pushViewController:zbst animated:YES];
     } else {
         NSLog(@"none?");
     }

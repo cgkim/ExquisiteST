@@ -18,7 +18,7 @@
         <Image>icon_strw.png</Image>
         <Title>汕头人文</Title>
         <SubTitle></SubTitle>
-        <ItemId>rw</ItemId>
+        <ItemId>wh</ItemId>
         <ItemType>T</ItemType>
     </Item>
 </Configs>

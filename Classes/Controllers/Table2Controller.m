@@ -13,6 +13,10 @@
 
 #import "CollectionController.h"
 #import "TableController.h"
+#import "MovieController.h"
+#import "WebController.h"
+#import "VideoController.h"
+
 
 @interface Table2Controller ()
 
@@ -70,8 +74,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     News *news = (News *)self.menuItems[indexPath.row];
-    NSArray *collectionArray = @[@"ms", @"ly"];
-    NSArray *tableArray = @[@"rw",@"3g1",@"3g2",@"3g3",@"3g4",@"3g7",@"3g8"];
+    NSArray *collectionArray = @[@"ly"];
+    NSArray *tableArray = @[@"ms",@"wh",@"3g1",@"3g2",@"3g3",@"3g4",@"3g7",@"3g8",@"bk"];
+    NSArray *videoArray = @[@"sp"];
     if ([collectionArray containsObject:news.ItemId]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = news.Title;
@@ -82,6 +87,12 @@
         tc.title = news.Title;
         tc.ItemId = news.ItemId;
         [self.navigationController pushViewController:tc animated:YES];
+    } else if ([videoArray containsObject:news.ItemId]) {
+        VideoController *wc = [[VideoController alloc] initWithNibName:nil bundle:nil];
+        wc.urlString = ZBST_VIDEO_URL;
+        wc.title = @"视频";
+        [self presentModalViewController:wc animated:YES];
+//        [self.navigationController pushViewController:wc animated:YES];
     } else {
         NSLog(@"none?");
     }
