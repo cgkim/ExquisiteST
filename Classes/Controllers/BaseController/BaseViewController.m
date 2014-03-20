@@ -22,6 +22,8 @@
             self.edgesForExtendedLayout = 0;
             self.extendedLayoutIncludesOpaqueBars = NO; // 指定了当Bar使用了不透明图片时，视图是否延伸至Bar所在区域，默认值时NO
             self.automaticallyAdjustsScrollViewInsets = YES; // 默认YES，如果视图里面存在唯一一个UIScrollView或其子类View，那么它会自动设置相应的内边距，这样可以让scroll占据整个视图，又不会让导航栏遮盖
+//            self.edgesForExtendedLayout = UIRectEdgeNone;
+//            self.extendedLayoutIncludesOpaqueBars = YES;
         }
         
         self.view.backgroundColor = [UIColor whiteColor];

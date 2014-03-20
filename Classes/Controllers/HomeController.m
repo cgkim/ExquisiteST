@@ -123,8 +123,29 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
     
     NSLog(@"%@", object.title);
     
-    NSArray *collectionArray = @[@"qbh", @"mlst", @"xyfc"];
-    NSArray *tableArray = @[@"cfhy", @"tzfz", @"mskx"];
+//    侨博会-10
+//    美丽汕头-2
+//    县域风采-7
+//    潮风海韵-4
+//    投资发展-5
+//    民生快线-8
+//    [直播汕头]
+//    报刊-11
+//    视频-加载第5点的电视直播rtsp源
+//    [多彩汕头]
+//    美食-12
+//    旅游-13
+//    人文-14
+//    [3G学堂]
+//    十八大专区-15
+//    圆梦南粤-16
+//    理论动态-17
+//    社会热点-18
+//    名家书画-19
+//    生活百科-20
+    
+    NSArray *collectionArray = @[@"10", @"2", @"7"];
+    NSArray *tableArray = @[@"4", @"5", @"8"];
     NSArray *table2Array = @[@"dcst", @"3gxt", @"zbst"];
     if ([collectionArray containsObject:object.itemid]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];

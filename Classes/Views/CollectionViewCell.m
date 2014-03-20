@@ -53,7 +53,7 @@
     
     _titleLabel.text = news.Title;
     
-    if ([news.ItemType isEqualToString:@"V"]) {
+    if ([news.ItemType isEqualToString:@"V"] || [news.ItemType isEqualToString:@"M"]) {
         _playIcon = [[UIImageView alloc] initWithFrame:CGRectZero];
         _playIcon.image = [UIImage imageNamed:@"icon_play.png"];
         _playIcon.contentMode = UIViewContentModeCenter;

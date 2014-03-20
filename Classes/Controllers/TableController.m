@@ -11,8 +11,9 @@
 #import "News.h"
 
 #import "SVProgressHUD.h"
+#import "SVPullToRefresh.h"
 
-#import "AppDelegate.h"
+#import "RESTfulEngine.h"
 #import "WebController.h"
 #import "MovieController.h"
 
@@ -20,6 +21,7 @@
 
 @property (strong, nonatomic) MKNetworkOperation *netOperation;
 @property (strong, nonatomic) NSMutableArray *newsItems;
+@property (assign, nonatomic) NSUInteger pnum;
 
 @end
 
@@ -37,6 +39,51 @@
 {
     [super viewDidLoad];
 
+    __weak TableController *weakSelf = self;
+    
+    // setup pull-to-refresh
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = DELAYINSECONDS;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            weakSelf.tableView.showsInfiniteScrolling = YES;
+            
+            weakSelf.pnum = 1;
+            [weakSelf.newsItems removeAllObjects];
+            [weakSelf loadData];
+        });
+    }];
+    
+    // setup infinite scrolling
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        int64_t delayInSeconds = DELAYINSECONDS;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+            weakSelf.pnum++;
+            [weakSelf loadData];
+        });
+    }];
+}
+
+#pragma mark - LoadData
+
+- (void)loadData
+{
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+    self.netOperation = [[RESTfulEngine sharedEngine] getNewsListToAppWithNlid:self.ItemId WithPnum:self.pnum WithPsize:PSIZE OnSucceeded:^(NSMutableArray *objects) {
+        [self.newsItems addObjectsFromArray:objects];
+        [self.tableView reloadData];
+        if (objects.count < PSIZE) {
+            self.tableView.showsInfiniteScrolling = NO;
+        }
+        [self.netOperation cancel];
+        [SVProgressHUD dismiss];
+    } onError:^(NSError *engineError) {
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", [engineError description]);
+    }];
 }
 
 #pragma mark - TableView DataSource
@@ -71,7 +118,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     News *news = (News *)self.newsItems[indexPath.row];
-    if ([news.ItemType isEqualToString:@"V"]) {
+    if ([news.ItemType isEqualToString:@"V"] || [news.ItemType isEqualToString:@"M"]) {
         ;
         NSURL *videoURL;
         NSRange range = [news.Image rangeOfString:@"http://"];
@@ -85,6 +132,7 @@
     } else {
         WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
         wc.urlString = WEBVIEW_URL(news.ItemId);
+        wc.title = news.Title;
         [self.navigationController pushViewController:wc animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -93,15 +141,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     if (!self.newsItems) {
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
-        self.netOperation = [NTAppDelegate.engine getNewsListV2WithNlid:self.ItemId OnSucceeded:^(NSMutableArray *objects) {
-            self.newsItems = objects;
-            [self.tableView reloadData];
-            [SVProgressHUD dismiss];
-        } onError:^(NSError *engineError) {
-            [SVProgressHUD dismiss];
-            NSLog(@"%@", [engineError description]);
-        }];
+        self.newsItems = [[NSMutableArray alloc] init];
+        self.pnum = 1;
+        [self loadData];
     }
 }
 

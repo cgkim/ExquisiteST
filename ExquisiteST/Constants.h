@@ -16,18 +16,20 @@
 #define debugMethod()
 #endif
 
-#define BASE_URL @"112.91.128.50"
+#define BASE_URL @"112.91.128.50:8080"
 
 #define JZST_URL(__C1__) [NSString stringWithFormat:@"%@", __C1__]
 
-#define GET_NEWS_LIST JZST_URL(@"getNewsListV2.aspx")
-#define GET_NEWS_CONTENT JZST_URL(@"getNewsContent.aspx")
+#define PSIZE 20
 
-#define VIDEO_URL(__C1__) [NSString stringWithFormat:@"http://%@/vd/%@", BASE_URL, __C1__]
+#define GET_NEWS_LIST JZST_URL(@"getNewsListToApp.aspx")
+#define GET_NEWS_CONTENT JZST_URL(@"getNewsToApp.aspx")
 
-#define IMAGE_URL(__C1__) [NSString stringWithFormat:@"http://%@/image/%@", BASE_URL, __C1__]
+#define VIDEO_URL(__C1__) [NSString stringWithFormat:@"http://%@/Files/Video/%@", BASE_URL, __C1__]
 
-#define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/getNewsContent.aspx?nid=%@", BASE_URL, __C1__]
+#define IMAGE_URL(__C1__) [NSString stringWithFormat:@"http://%@/Files/NewsTxt/%@", BASE_URL, __C1__]
+
+#define WEBVIEW_URL(__C1__) [NSString stringWithFormat:@"http://%@/getNewsToApp.aspx?mbtype=1&nid=%@", BASE_URL, __C1__]
 
 #define ZBST_SP_URL @"http://u.3gtv.net/yuetv/Living_Channel_Info?online_id=37"
 #define ZBST_VIDEO_URL @"http://u.3gtv.net/yuetv/Living_Play?online_id=37&p_mode=H_m3u8&jmds="

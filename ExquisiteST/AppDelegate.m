@@ -10,15 +10,16 @@
 
 #import "BaseNavigationController.h"
 
+#import "RESTfulEngine.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UIApplication sharedApplication].statusBarHidden = NO;
-    
-    self.engine = [[RESTfulEngine alloc] initWithHostName:BASE_URL];
-    [self.engine useCache];
 
+    [RESTfulEngine sharedEngine];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

@@ -30,7 +30,7 @@
 - (void)setModel:(News *)model
 {
     _model = model;
-    if ([_model.ItemType isEqualToString:@"V"]) {
+    if ([_model.ItemType isEqualToString:@"V"] || [_model.ItemType isEqualToString:@"M"]) {
         self.imageView.image = [UIImage imageNamed:@"t_video.png"];
     }else if ([_model.ItemType isEqualToString:@"T"]) {
         self.imageView.image = [UIImage imageNamed:@"t_text.png"];

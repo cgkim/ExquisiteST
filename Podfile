@@ -7,4 +7,6 @@ pod 'XMLDictionary', '1.3'
 pod 'SDWebImage', '3.5'
 
 pod 'SVProgressHUD', '1.0'
-#pod 'SVPullToRefresh'
+pod 'SVPullToRefresh', '0.4.1'
+
+#pod 'MSSlideNavigationController'

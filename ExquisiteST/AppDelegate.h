@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "HomeController.h"
-#import "RESTfulEngine.h"
-#define NTAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,6 +16,5 @@
 
 
 @property (strong, nonatomic) HomeController *home;
-@property (strong, nonatomic) RESTfulEngine *engine;
 
 @end

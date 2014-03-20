@@ -8,8 +8,10 @@
 
 #import "CollectionController.h"
 
-#import "AppDelegate.h"
+#import "RESTfulEngine.h"
+
 #import "SVProgressHUD.h"
+#import "SVPullToRefresh.h"
 
 #import "PSCollectionView.h"
 #import "CollectionViewCell.h"
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) MKNetworkOperation *netOperation;
 @property (weak, nonatomic) PSCollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *newsItems;
+@property (assign, nonatomic) NSUInteger pnum;
 
 @end
 
@@ -49,7 +52,57 @@
     collectionView.numColsPortrait = 2;
     collectionView.numColsLandscape = 2;
     [self.view addSubview:collectionView];
-    [collectionView reloadData];
+//    [collectionView reloadData];
+    
+    __weak CollectionController *weakSelf = self;
+    debugMethod();
+    
+    // setup pull-to-refresh
+    [self.collectionView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = DELAYINSECONDS;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [weakSelf.collectionView.pullToRefreshView stopAnimating];
+            weakSelf.collectionView.showsInfiniteScrolling = YES;
+            
+            weakSelf.pnum = 1;
+            [weakSelf.newsItems removeAllObjects];
+            [weakSelf loadData];
+        });
+    }];
+    
+    // setup infinite scrolling
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
+        int64_t delayInSeconds = DELAYINSECONDS;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [weakSelf.collectionView.infiniteScrollingView stopAnimating];
+            
+            weakSelf.pnum++;
+            [weakSelf loadData];
+        });
+    }];
+}
+
+#pragma mark - LoadData
+
+- (void)loadData
+{
+    debugMethod();
+    
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
+    self.netOperation = [[RESTfulEngine sharedEngine] getNewsListToAppWithNlid:self.ItemId WithPnum:self.pnum WithPsize:PSIZE OnSucceeded:^(NSMutableArray *objects) {
+        [self.newsItems addObjectsFromArray:objects];
+        if (objects.count < PSIZE) {
+            self.collectionView.showsInfiniteScrolling = NO;
+        }
+        [self.collectionView reloadData];
+        [self.netOperation cancel];
+        [SVProgressHUD dismiss];
+    } onError:^(NSError *engineError) {
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", [engineError description]);
+    }];
 }
 
 #pragma mark - PSCollectionViewDelegate and DataSource
@@ -76,7 +129,7 @@
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
     News *news = (News *)self.newsItems[index];
-    if ([news.ItemType isEqualToString:@"V"]) {
+    if ([news.ItemType isEqualToString:@"V"] || [news.ItemType isEqualToString:@"M"]) {
         ;
         NSURL *videoURL;
         NSRange range = [news.Image rangeOfString:@"http://"];
@@ -85,27 +138,25 @@
         } else {
             videoURL = [NSURL URLWithString:VIDEO_URL(news.ItemId)];
         }
+//        videoURL = [NSURL URLWithString:@"http://yinyueshiting.baidu.com/data2/music/114982694/114944077133200128.mp3?xcode=ea6d1c4cba0f540aa4a10d243fcb7c29841e426b4214a5f4"];
+
         MovieController *mv = [[MovieController alloc] initWithContentURL:videoURL];
         [self presentMoviePlayerViewControllerAnimated:mv];
     } else {
         WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
         wc.urlString = WEBVIEW_URL(news.ItemId);
+        wc.title = news.Title;
         [self.navigationController pushViewController:wc animated:YES];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    debugMethod();
     if (!self.newsItems) {
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"loading", nil)];
-        self.netOperation = [NTAppDelegate.engine getNewsListV2WithNlid:self.ItemId OnSucceeded:^(NSMutableArray *objects) {
-            self.newsItems = objects;
-            [self.collectionView reloadData];
-            [SVProgressHUD dismiss];
-        } onError:^(NSError *engineError) {
-            [SVProgressHUD dismiss];
-            NSLog(@"%@", [engineError description]);
-        }];
+        self.newsItems = [[NSMutableArray alloc] init];
+        self.pnum = 1;
+        [self loadData];
     }
 }
 
@@ -122,6 +173,7 @@
 
 - (void)unLoadViews {
     // TODO 具体的释放操作
+    [self.newsItems removeAllObjects];
     self.newsItems = nil;
 }
 

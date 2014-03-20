@@ -21,7 +21,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.title = @"新闻详情";
+//        self.title = @"新闻详情";
     }
     return self;
 }

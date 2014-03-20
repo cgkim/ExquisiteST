@@ -74,8 +74,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     News *news = (News *)self.menuItems[indexPath.row];
-    NSArray *collectionArray = @[@"ly"];
-    NSArray *tableArray = @[@"ms",@"wh",@"3g1",@"3g2",@"3g3",@"3g4",@"3g7",@"3g8",@"bk"];
+    NSLog(@"items: %@", news.ItemId);
+
+//    (类别名称)-(后台对应ID)
+//    
+//    侨博会-10
+//    美丽汕头-2
+//    县域风采-7
+//    潮风海韵-4
+//    投资发展-5
+//    民生快线-8
+//    
+//    直播汕头，多彩汕头，3G学堂这三个大类存在的2级列表都是写死的，照原来的处理即可，只是3级的也要照列表页的方式去请求数据，具体如下：
+//    
+//    [直播汕头]
+//    报刊-11
+//    视频-加载第5点的电视直播rtsp源
+//    [多彩汕头]
+//    美食-12
+//    旅游-13
+//    人文-14 文化
+//    [3G学堂]
+//    十八大专区-15
+//    圆梦南粤-16
+//    理论动态-17
+//    社会热点-18
+//    名家书画-19
+//    生活百科-20
+    
+    NSArray *collectionArray = @[@"13"];
+    NSArray *tableArray = @[@"12",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"11"];
     NSArray *videoArray = @[@"sp"];
     if ([collectionArray containsObject:news.ItemId]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];

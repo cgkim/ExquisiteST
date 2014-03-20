@@ -17,11 +17,26 @@
 #pragma mark -
 #pragma mark Custom Methods
 
-- (MKNetworkOperation *)getNewsListV2WithNlid:(NSString *)nlid
-                                  OnSucceeded:(ArrayBlock)succeededBlock
-                                      onError:(ErrorBlock)errorBlock
+static RESTfulEngine *engine = nil;
+
++ (RESTfulEngine *)sharedEngine
 {
-    NSDictionary *params = @{@"nlid": nlid};
+    if (!engine) {
+        engine = [[RESTfulEngine alloc] initWithHostName:BASE_URL];
+        [engine useCache];
+    }
+    return engine;
+}
+
+- (MKNetworkOperation *)getNewsListToAppWithNlid:(NSString *)nlid
+                                        WithPnum:(NSUInteger)pnum
+                                       WithPsize:(NSUInteger)psize
+                                     OnSucceeded:(ArrayBlock)succeededBlock
+                                         onError:(ErrorBlock)errorBlock
+{
+    NSDictionary *params = @{@"nlid": nlid,
+                             @"pnum": [NSString stringWithFormat:@"%lu", (unsigned long)pnum],
+                             @"psize": [NSString stringWithFormat:@"%lu", (unsigned long)psize]};
     MKNetworkOperation *op = (MKNetworkOperation *)[self operationWithPath:GET_NEWS_LIST params:params httpMethod:@"GET"];
     NSLog(@"url: %@", [op url]);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
@@ -32,6 +47,7 @@
         [tempItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [newsItems addObject:[[News alloc] initWithDictionary:obj]];
         }];
+        NSLog(@"b %d", newsItems.count);
         succeededBlock(newsItems);
         
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {

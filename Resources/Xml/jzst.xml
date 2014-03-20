@@ -4,14 +4,14 @@
         <Image>ibtn1.png</Image>
         <Title>侨博会</Title>
         <SubTitle></SubTitle>
-        <ItemId>qbh</ItemId>
+        <ItemId>10</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>ibtn2.png</Image>
         <Title>美丽汕头</Title>
         <SubTitle></SubTitle>
-        <ItemId>mlst</ItemId>
+        <ItemId>2</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
@@ -25,14 +25,14 @@
         <Image>ibtn4.png</Image>
         <Title>潮风海韵</Title>
         <SubTitle></SubTitle>
-        <ItemId>cfhy</ItemId>
+        <ItemId>4</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>ibtn5.png</Image>
         <Title>投资发展</Title>
         <SubTitle></SubTitle>
-        <ItemId>tzfz</ItemId>
+        <ItemId>5</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
@@ -46,14 +46,14 @@
         <Image>ibtn7.png</Image>
         <Title>县域风采</Title>
         <SubTitle></SubTitle>
-        <ItemId>xyfc</ItemId>
+        <ItemId>7</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>ibtn8.png</Image>
         <Title>民生快线</Title>
         <SubTitle></SubTitle>
-        <ItemId>mskx</ItemId>
+        <ItemId>8</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
