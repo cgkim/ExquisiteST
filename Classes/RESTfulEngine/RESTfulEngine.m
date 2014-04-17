@@ -47,7 +47,7 @@ static RESTfulEngine *engine = nil;
         [tempItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [newsItems addObject:[[News alloc] initWithDictionary:obj]];
         }];
-        NSLog(@"b %d", newsItems.count);
+        NSLog(@"b %lo", newsItems.count);
         succeededBlock(newsItems);
         
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {

@@ -105,6 +105,7 @@
     NSArray *collectionArray = @[@"13"];
     NSArray *tableArray = @[@"12",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"11"];
     NSArray *videoArray = @[@"sp"];
+    NSArray *webArray = @[@"wdy_bsbm", @"wdy_sczp", @"wdy_gs"];
     if ([collectionArray containsObject:news.ItemId]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = news.Title;
@@ -121,6 +122,12 @@
         wc.title = @"视频";
         [self presentModalViewController:wc animated:YES];
 //        [self.navigationController pushViewController:wc animated:YES];
+    } else if ([webArray containsObject:news.ItemId]) {
+        WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+        // E京
+        wc.urlString = @"http://mo.st001.com/";
+        wc.title = news.Title;
+        [self.navigationController pushViewController:wc animated:YES];
     } else {
         NSLog(@"none?");
     }

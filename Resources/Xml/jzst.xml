@@ -2,9 +2,9 @@
 <Configs>
     <Item>
         <Image>ibtn1.png</Image>
-        <Title>侨博会</Title>
+        <Title>微电影</Title>
         <SubTitle></SubTitle>
-        <ItemId>10</ItemId>
+        <ItemId>wdy</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
@@ -61,6 +61,13 @@
         <Title>3G学堂</Title>
         <SubTitle></SubTitle>
         <ItemId>3gxt</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>ibtn10.png</Image>
+        <Title>新闻联播</Title>
+        <SubTitle></SubTitle>
+        <ItemId>xwlb</ItemId>
         <ItemType>T</ItemType>
     </Item>
 </Configs>

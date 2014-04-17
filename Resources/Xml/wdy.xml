@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configs>
+    <Item>
+        <Image>t_text.png</Image>
+        <Title>比赛报名</Title>
+        <SubTitle></SubTitle>
+        <ItemId>wdy_bsbm</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>t_video.png</Image>
+        <Title>上传作品</Title>
+        <SubTitle></SubTitle>
+        <ItemId>wdy_sczp</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>wdygs.jpg</Image>
+        <Title>微电影观赏</Title>
+        <SubTitle></SubTitle>
+        <ItemId>wdy_gs</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+    <Item>
+        <Image>wdygs2.jpg</Image>
+        <Title>微电影观赏</Title>
+        <SubTitle></SubTitle>
+        <ItemId>wdy_gs</ItemId>
+        <ItemType>T</ItemType>
+    </Item>
+</Configs>

@@ -2,14 +2,14 @@
 <Configs>
     <Item>
         <Image>a.jpg</Image>
-        <Title>侨博会</Title>
+        <Title>微电影大赛</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>
     </Item>
     <Item>
         <Image>b.jpg</Image>
-        <Title>汕头风景</Title>
+        <Title>大华网</Title>
         <SubTitle></SubTitle>
         <ItemId>1</ItemId>
         <ItemType>T</ItemType>

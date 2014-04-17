@@ -144,9 +144,9 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
 //    名家书画-19
 //    生活百科-20
     
-    NSArray *collectionArray = @[@"10", @"2", @"7"];
+    NSArray *collectionArray = @[@"2", @"7"];
     NSArray *tableArray = @[@"4", @"5", @"8"];
-    NSArray *table2Array = @[@"dcst", @"3gxt", @"zbst"];
+    NSArray *table2Array = @[@"wdy", @"dcst", @"3gxt", @"zbst"];
     if ([collectionArray containsObject:object.itemid]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = object.title;
