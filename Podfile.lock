@@ -13,7 +13,7 @@ DEPENDENCIES:
   - MKNetworkKit (= 0.87)
   - SDWebImage (= 3.5)
   - SVProgressHUD (= 1.0)
-  - SVPullToRefresh
+  - SVPullToRefresh (= 0.4.1)
   - XMLDictionary (= 1.3)
 
 SPEC CHECKSUMS:
@@ -24,4 +24,4 @@ SPEC CHECKSUMS:
   SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
   XMLDictionary: 27390d3517062694ccb307a7750250e1b687571d
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1
