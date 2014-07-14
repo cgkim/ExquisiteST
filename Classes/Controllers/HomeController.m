@@ -146,7 +146,8 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
     
     NSArray *collectionArray = @[@"2", @"7"];
     NSArray *tableArray = @[@"4", @"5", @"8"];
-    NSArray *table2Array = @[@"wdy", @"dcst", @"3gxt", @"zbst"];
+    NSArray *table2Array = @[@"dcst", @"3gxt", @"zbst"];
+    NSArray *webArray = @[@"wdy"];
     if ([collectionArray containsObject:object.itemid]) {
         CollectionController *cc = [[CollectionController alloc] initWithNibName:nil bundle:nil];
         cc.title = object.title;
@@ -162,6 +163,13 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
         tc.title = object.title;
         tc.ItemId = object.itemid;
         [self.navigationController pushViewController:tc animated:YES];
+    } else if ([webArray containsObject:object.itemid]) {
+        NSURL *url = [NSURL URLWithString:@"http://www.isst.org.cn/mo/"];
+        [[UIApplication sharedApplication] openURL:url];
+//        WebController *wc = [[WebController alloc] initWithNibName:nil bundle:nil];
+//        wc.title = object.title;
+//        wc.urlString = @"http://www.isst.org.cn/mo/";
+//        [self.navigationController pushViewController:wc animated:YES];
     } else {
         NSLog(@"none?");
     }

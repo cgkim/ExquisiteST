@@ -91,13 +91,17 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
         self.played = YES;
     }
+    
+    [super viewWillDisappear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
+    
+    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

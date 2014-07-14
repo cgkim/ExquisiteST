@@ -81,7 +81,6 @@
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self addGestureRecognizer:singleTap];
-    
     [self setNeedsLayout];
 }
 

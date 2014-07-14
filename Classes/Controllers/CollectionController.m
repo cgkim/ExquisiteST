@@ -158,6 +158,8 @@
         self.pnum = 1;
         [self loadData];
     }
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -169,6 +171,8 @@
         [self.netOperation cancel];
         self.netOperation = nil;
     }
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)unLoadViews {

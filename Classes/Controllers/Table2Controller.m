@@ -146,6 +146,14 @@
             [self.menuItems addObject:[[News alloc] initWithDictionary:obj]];
         }];
     }
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    
+    [super viewDidDisappear:animated];
 }
 
 - (void)unLoadViews {

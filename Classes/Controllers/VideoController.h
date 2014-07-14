@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
+// for apple video live stream
+
 @interface VideoController : BaseViewController
 
 @property (strong, nonatomic) NSString *urlString;

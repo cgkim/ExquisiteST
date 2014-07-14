@@ -32,6 +32,7 @@
 
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.webView = webView;
+    self.webView.scalesPageToFit = YES;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
@@ -73,13 +74,17 @@
 {
     NSLog(@"request url: %@", self.urlString);
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    
+    [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
+    
+    [super viewDidDisappear:animated];
 }
 
 - (void)unLoadViews {
