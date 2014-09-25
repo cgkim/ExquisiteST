@@ -172,7 +172,7 @@
         self.netOperation = nil;
     }
     
-    [super viewWillAppear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (void)unLoadViews {

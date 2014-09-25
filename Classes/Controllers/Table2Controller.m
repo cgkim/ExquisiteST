@@ -150,10 +150,10 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     
-    [super viewDidDisappear:animated];
+    [super viewDidAppear:animated];
 }
 
 - (void)unLoadViews {
