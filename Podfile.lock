@@ -2,26 +2,26 @@ PODS:
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - Reachability (3.1.1)
-  - SDWebImage (3.5):
+  - SDWebImage (3.7.1):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5)
+  - SDWebImage/Core (3.7.1)
   - SVProgressHUD (1.0)
   - SVPullToRefresh (0.4.1)
   - XMLDictionary (1.3)
 
 DEPENDENCIES:
   - MKNetworkKit (= 0.87)
-  - SDWebImage (= 3.5)
+  - SDWebImage (= 3.7.1)
   - SVProgressHUD (= 1.0)
   - SVPullToRefresh (= 0.4.1)
   - XMLDictionary (= 1.3)
 
 SPEC CHECKSUMS:
-  MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: f1a72472f8a2d54445f1fedafe2090593d9caf7f
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
-  SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
-  XMLDictionary: 27390d3517062694ccb307a7750250e1b687571d
+  MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
+  XMLDictionary: 40bf0ff87c5420ed20af746c663acd711826a6d0
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

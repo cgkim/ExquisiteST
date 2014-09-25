@@ -97,14 +97,14 @@ static NSString *const kButtonReuseIdentifier = @"launcherButton";
     self.launcherView.delegate = self;
     [self.launcherView reloadData];
     
-    UIImageView *bottomView;
-    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]){
-        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 64.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
-    } else {
-        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 44.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
-    }
-    bottomView.image = [UIImage imageNamed:@"toolbar_bg.png"];
-    [self.view addSubview:bottomView];
+//    UIImageView *bottomView;
+//    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]){
+//        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 64.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
+//    } else {
+//        bottomView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, self.view.bounds.size.height - 44.0 - bottomViewHeight, self.view.bounds.size.width, bottomViewHeight)];
+//    }
+//    bottomView.image = [UIImage imageNamed:@"toolbar_bg.png"];
+//    [self.view addSubview:bottomView];
 }
 
 #pragma mark - ScrollPageView Delegate
